@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--<suite name="ALL SUITES">-->
+<!--     <suite name="Single Browser" parallel="none">-->
+<!--        <listeners>-->
+<!--            <listener class-name="com.mvmt.listeners.ProjectListener"/>-->
+<!--        </listeners>-->
+<!--        <test name="ChromeTest">-->
+<!--            <parameter name="browser" value="chrome"/>-->
+<!--            <classes>-->
+<!--                <class name="com.mvmt.tests.CreateAccountPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.LogInPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillLoginFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.HomePageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="gotoMensWatchesTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.MensWatchesPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="selectAndAddToCartTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+<!--    </suite>-->
+<!--    <suite name="Parallel Suite" parallel="tests" thread-count="2" enabled="false">-->
+<!--        &lt;!&ndash; Register listeners globally &ndash;&gt;-->
+<!--        <listeners>-->
+<!--            <listener class-name="com.mvmt.listeners.ProjectListener"/>-->
+<!--        </listeners>-->
+
+<!--        &lt;!&ndash; Test for Chrome &ndash;&gt;-->
+<!--        <test name="ChromeTest"  thread-count="1">-->
+<!--            <parameter name="browser" value="chrome"/>-->
+<!--            <classes>-->
+<!--                <class name="com.mvmt.tests.CreateAccountPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.LogInPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillLoginFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.HomePageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="gotoMensWatchesTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.MensWatchesPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="selectAndAddToCartTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+<!--        &lt;!&ndash; Test for Firefox &ndash;&gt;-->
+<!--        <test name="FirefoxTest"  thread-count="1">-->
+<!--            <parameter name="browser" value="firefox"/>-->
+<!--            <classes>-->
+<!--                <class name="com.mvmt.tests.CreateAccountPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.LogInPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="fillLoginFormTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.HomePageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="gotoMensWatchesTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--                <class name="com.mvmt.tests.MensWatchesPageTests">-->
+<!--                    <methods>-->
+<!--                        <include name="selectAndAddToCartTest"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+<!--    </suite>-->
+<!--</suite>-->
+
+
+
+
+<suite name="Single Browser" parallel="none">
+<listeners>
+    <listener class-name="com.mvmt.listeners.ProjectListener"/>
+</listeners>
+<test name="ChromeTest">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+        <class name="com.mvmt.tests.CreateAccountPageTests">
+            <methods>
+                <include name="fillFormTest"/>
+            </methods>
+        </class>
+        <class name="com.mvmt.tests.LogInPageTests">
+            <methods>
+                <include name="fillLoginFormTest"/>
+            </methods>
+        </class>
+        <class name="com.mvmt.tests.HomePageTests">
+            <methods>
+                <include name="gotoMensWatchesTest"/>
+            </methods>
+        </class>
+        <class name="com.mvmt.tests.MensWatchesPageTests">
+            <methods>
+                <include name="selectAndAddToCartTest"/>
+            </methods>
+        </class>
+    </classes>
+</test>
+</suite>
