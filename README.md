@@ -1,5 +1,6 @@
 Complete MVMT automation 
 - automated 2 flows 
+
   1] signup -> login -> home -> watches -> addtocart
 
   2] login -> home -> watches -> addtocart [data driven - multi user login]
