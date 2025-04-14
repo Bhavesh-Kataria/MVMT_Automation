@@ -1,29 +1,24 @@
 package com.mvmt.tests;
 
 import com.mvmt.base.Base;
-import com.mvmt.pages.CreateAccountPage;
-import com.mvmt.pages.HomePage;
+
 import com.mvmt.pages.LogInPage;
-import com.mvmt.util.TestUtil;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.mvmt.util.ExcelUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Iterator;
+
+import java.time.Duration;
 
 public class LogInPageTests extends Base {
     private WebDriver webDriver;
     private LogInPage loginPage;
+    private boolean flag = true;
 
     public LogInPageTests(){
         super();
@@ -73,56 +68,41 @@ public class LogInPageTests extends Base {
         }
     }
 
-//    @Test
-//    public void multiUserFillLoginFormTest() throws InterruptedException {
-//        String userName;
-//        String password;
-//        if(loginPage == null){
-//            initialization();
-//            cleanUp();
-//            loginPage = new LogInPage();
-//        }
-//        try {
-//            FileInputStream fis = new FileInputStream("/Users/topb/Desktop/Automation Testing/Web Testing/MVMT_Automation/src/main/java/com/mvmt/testdata/MVMT_DATA.xlsx");
-//            Workbook workbook = new XSSFWorkbook(fis);
-//            Sheet selectedSheet = workbook.getSheet("LoginPage");
-//            Iterator<Row> iterator = selectedSheet.iterator();
-//            iterator.next();
-//            Row currentRow;
-//            boolean flag = false;
-//            int count = 0;
-//            while (iterator.hasNext()) {
-//                currentRow = iterator.next();
-//                userName = currentRow.getCell(0).getStringCellValue();
-//                password = currentRow.getCell(1).getStringCellValue();
-//                //already logged in then has to logout first
-//                if(flag){
-//                    WebElement accDropDownElement = driver.findElement(By.xpath("//div[@aria-label='dropdownMenu Account']"));
-//                    TestUtil.hoverOperation(accDropDownElement);
-//                    driver.findElement(By.xpath("//a[@href='https://www.mvmt.com/logout']")).click();
-//                    driver.navigate().to("https://www.mvmt.com/login?action=register");
-//                    Thread.sleep(5000);
-//                    driver.findElement(By.xpath("//a[@href='#login']")).click();
-//                    Thread.sleep(5000);
-//                }
-//                homePage =  loginPage.fillLoginForm(userName, password);
-//                Thread.sleep(5000);
-//                driver.navigate().to("https://www.mvmt.com/home");
-//                if(count==0){
-//                    driver.findElement(By.xpath("//div[@id='ltkpopup-close-button']/a")).click();
-//                }
-//                HomePageTests testObj = new HomePageTests();
-//                testObj.gotoMensWatchesTest();
-//                count++;
-//                flag = true;
-//            }
-//        } catch (FileNotFoundException e) {
-//            System.out.println(e);
-//        } catch (IOException ie) {
-//            ie.getStackTrace();
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//    }
+    @DataProvider(name = "loginUsers")
+    public Object[][] getUsers() {
+        return ExcelUtil.getLoginData();
+    }
+
+    @Test(dataProvider = "loginUsers")
+    public void multiUserFillLoginFormTest(String username, String password) throws InterruptedException {
+        if(webDriver == null){
+            initialization("chrome");
+            webDriver = getDriver();
+            cleanUp();
+            loginPage = new LogInPage();
+            webDriver.navigate().to("https://www.mvmt.com/login?action=login");
+        }
+        Thread.sleep(5000);
+        loginPage.fillLoginForm(username, password);
+        Thread.sleep(5000);
+        webDriver.navigate().to("https://www.mvmt.com/home");
+        if (flag){
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[@id='ltkpopup-close-button']/a")
+            ));
+            webDriver.findElement(By.xpath("//div[@id='ltkpopup-close-button']/a")).click();
+            flag = false;
+        }
+
+
+        HomePageTests homePageTests = new HomePageTests();
+        homePageTests.gotoMensWatchesTest();
+
+        MensWatchesPageTests mensWatchesPageTests = new MensWatchesPageTests();
+        mensWatchesPageTests.selectAndAddToCartTest();
+        webDriver.navigate().to("https://www.mvmt.com/login?action=login");
+
+
+    }
 }

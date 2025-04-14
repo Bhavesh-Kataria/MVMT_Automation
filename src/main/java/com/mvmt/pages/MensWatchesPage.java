@@ -26,7 +26,7 @@ public class MensWatchesPage extends Base {
     }
 
     public void selectAndAddToCart() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(8000);
         selectedWatchElement.click();
         Thread.sleep(5000);
         addToCartBtn.click();

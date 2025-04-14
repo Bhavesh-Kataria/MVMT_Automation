@@ -97,21 +97,48 @@
 
 
 
-<suite name="Single Browser" parallel="none">
+<!--<suite name="Single Browser" parallel="none">-->
+<!--<listeners>-->
+<!--    <listener class-name="com.mvmt.listeners.ProjectListener"/>-->
+<!--</listeners>-->
+<!--<test name="ChromeTest">-->
+<!--    <parameter name="browser" value="chrome"/>-->
+<!--    <classes>-->
+<!--        <class name="com.mvmt.tests.CreateAccountPageTests">-->
+<!--            <methods>-->
+<!--                <include name="fillFormTest"/>-->
+<!--            </methods>-->
+<!--        </class>-->
+<!--        <class name="com.mvmt.tests.LogInPageTests">-->
+<!--            <methods>-->
+<!--                <include name="fillLoginFormTest"/>-->
+<!--            </methods>-->
+<!--        </class>-->
+<!--        <class name="com.mvmt.tests.HomePageTests">-->
+<!--            <methods>-->
+<!--                <include name="gotoMensWatchesTest"/>-->
+<!--            </methods>-->
+<!--        </class>-->
+<!--        <class name="com.mvmt.tests.MensWatchesPageTests">-->
+<!--            <methods>-->
+<!--                <include name="selectAndAddToCartTest"/>-->
+<!--            </methods>-->
+<!--        </class>-->
+<!--    </classes>-->
+<!--</test>-->
+<!--</suite>-->
+
+
+<suite name="Data Driven Approach" parallel="none">
 <listeners>
     <listener class-name="com.mvmt.listeners.ProjectListener"/>
 </listeners>
 <test name="ChromeTest">
     <parameter name="browser" value="chrome"/>
     <classes>
-        <class name="com.mvmt.tests.CreateAccountPageTests">
-            <methods>
-                <include name="fillFormTest"/>
-            </methods>
-        </class>
         <class name="com.mvmt.tests.LogInPageTests">
             <methods>
-                <include name="fillLoginFormTest"/>
+                <include name="multiUserFillLoginFormTest"/>
             </methods>
         </class>
         <class name="com.mvmt.tests.HomePageTests">
